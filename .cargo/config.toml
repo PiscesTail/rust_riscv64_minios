@@ -1,0 +1,11 @@
+# 默认把 cargo 交叉编译到 riscv64 裸机 target
+[build]
+target = "riscv64gc-unknown-none-elf"
+
+[target.riscv64gc-unknown-none-elf]
+rustflags = [
+    "-C", "link-arg=-Tlinker.ld",
+    "-C", "link-arg=--gc-sections",
+    "-C", "linker=rust-lld",
+    "-C", "linker-flavor=ld.lld",
+]

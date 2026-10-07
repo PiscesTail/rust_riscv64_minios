@@ -1,0 +1,21 @@
+[package]
+name = "minios"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+# 裸机内核无法使用 Rust 自带的 test harness（其依赖宿主机的 `test` crate）。
+# 关闭后 rust-analyzer 的 `cargo check --all-targets` 不再尝试编译“bin 的测试版”，
+# 也就不会报 `can't find crate for \`test\``。
+[[bin]]
+name = "minios"
+path = "src/main.rs"
+harness = false
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+opt-level = "s"
